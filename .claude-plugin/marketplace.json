@@ -1,0 +1,21 @@
+{
+  "name": "paper-for-beginners",
+  "owner": {
+    "name": "hejuntao"
+  },
+  "metadata": {
+    "description": "小白读论文 - 将学术论文转化为零基础读者也能看懂的通俗解读",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "paper-for-beginners",
+      "description": "以小白友好的方式解读学术论文，用大白话、生活比喻和故事化叙述让任何人都能读懂论文",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/paper-for-beginners"
+      ]
+    }
+  ]
+}
