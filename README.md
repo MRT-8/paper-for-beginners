@@ -1,45 +1,46 @@
-# 小白读论文 (Paper for Beginners)
+# 小白读论文 Paper for Beginners
 
-将学术论文转化为零基础读者也能看懂的通俗解读。用大白话、生活比喻和故事化叙述，让任何人都能读懂论文。
+> 看不懂论文？丢给 Claude，它用大白话、生活比喻和故事帮你把论文"翻译"成人话。
 
-## 特性
+一个 [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) 的 [Agent Skill](https://agentskills.io/)，将学术论文转化为零基础读者也能看懂的结构化通俗解读。
 
-- 10 个结构化 Section，从基本信息到动手实践，全方位解读论文
-- 每个抽象概念都配生活化比喻，零门槛理解
-- 自动搜索论文全文和开源代码
-- 可选：一键保存到 Notion，排版精美
+## 为什么需要这个 Skill
 
-## 安装
+读论文的典型痛点：
 
-### 方式一：通过 Claude Code Plugin 安装（推荐）
+- 摘要看完不知道论文在讲什么
+- 专业术语太多，每个词都要查
+- 方法部分像天书，公式看不懂
+- 读完了记不住重点
 
-```bash
-# 1. 添加 marketplace
-/plugin marketplace add MRT-8/paper-for-beginners
+**这个 Skill 让 Claude 帮你做一件事：把论文拆成 10 个结构化 Section，用讲故事的方式让你真正读懂它。**
 
-# 2. 安装插件
-/plugin install paper-for-beginners@paper-for-beginners
-```
+## Demo
 
-### 方式二：手动安装
+以经典论文 *Attention Is All You Need* 为例，以下是 Skill 实际输出的片段：
 
-将 `skills/paper-for-beginners/` 目录复制到 `~/.claude/skills/` 下：
+### Section 2 — 一句话看懂 + 速记版流程
 
-```bash
-git clone https://github.com/MRT-8/paper-for-beginners.git
-cp -r paper-for-beginners/skills/paper-for-beginners ~/.claude/skills/
-```
+> **一句话概括**：这篇论文提出了一种新的神经网络架构，不用传统的"逐字阅读"方式，而是让模型一次性"看到"整段话的所有位置，靠注意力打分决定哪里重要。
+>
+> **速记版流程**：
+> 1. 把句子里的每个词变成一串数字
+> 2. 每个词问其他所有词"你跟我相关吗？"，得到一组关注度分数
+> 3. 按分数把相关信息加权汇总，形成新的表示
+> 4. 重复这个过程好多层，理解越来越深
+> 5. 最后根据理解生成翻译结果
 
-## 使用方式
+### Section 3 — 专业术语词典（节选）
 
-安装后，在 Claude Code 中直接说：
-
-- "小白读论文 Attention Is All You Need"
-- "用大白话讲讲这篇论文 https://arxiv.org/abs/xxxx.xxxxx"
-- "帮我看懂这篇论文"
-- "ELI5 this paper"
+> **Attention 机制** — 让模型学会"重点看哪里"。就像你读长文章时眼睛会自动跳到加粗关键词上，Attention 就是教 AI 做同样的事。
+>
+> **Self-Attention** — "自己看自己"。一句话里的每个词去跟同一句话里的其他词互相打分，看彼此有多相关。比如"小猫追着球跑"，"追"会特别关注"小猫"和"球"。
+>
+> **Multi-Head Attention** — 同时从多个角度去"看"。一组 Attention 只能捕捉一种关系，多组并行就像多个侦探各查一条线索，最后汇总。
 
 ## 输出结构
+
+每篇论文解读包含 10 个 Section：
 
 | Section | 内容 |
 |---------|------|
@@ -54,17 +55,49 @@ cp -r paper-for-beginners/skills/paper-for-beginners ~/.claude/skills/
 | 9. 亮点与不足 | 方法层面的优缺点分析 |
 | 10. 读完应该记住的 | Takeaway + 动手指南 |
 
+## 快速开始
+
+### 安装
+
+**方式一：Plugin 安装（推荐）**
+
+在 Claude Code 中执行：
+
+```
+/plugin marketplace add MRT-8/paper-for-beginners
+/plugin install paper-for-beginners@paper-for-beginners
+```
+
+**方式二：手动安装**
+
+```bash
+git clone https://github.com/MRT-8/paper-for-beginners.git
+cp -r paper-for-beginners/skills/paper-for-beginners ~/.claude/skills/
+```
+
+### 使用
+
+安装后，在 Claude Code 中直接说：
+
+```
+小白读论文 Attention Is All You Need
+```
+
+```
+用大白话讲讲这篇论文 https://arxiv.org/abs/xxxx.xxxxx
+```
+
+```
+ELI5 this paper: [论文标题]
+```
+
 ## Notion 集成（可选）
 
-如果你希望将解读结果自动保存到 Notion：
+支持将解读结果一键保存到 Notion，自动排版。需要：
 
 1. 创建 [Notion Integration](https://www.notion.so/my-integrations) 并获取 Token
-2. 设置环境变量：
-   ```bash
-   export NOTION_TOKEN="your_notion_integration_token"
-   ```
-3. 在 Notion 中创建一个用于存放论文解读的页面，获取其 Page ID
-4. 将 `SKILL.md` 中第四步的 `<YOUR_NOTION_PAGE_ID>` 替换为你的实际 Page ID
+2. 设置环境变量 `export NOTION_TOKEN="your_token"`
+3. 将 `SKILL.md` 中第四步的 `<YOUR_NOTION_PAGE_ID>` 替换为你的 Notion 页面 ID
 
 ## License
 
